@@ -11,6 +11,7 @@ function writePassword() {
 }
 
 // Add event listener to generate button 
+generateBtn.addEventListener("click", writePassword);
 ///////////////////////// DO NOT CHANGE ABOVE HERE /////////////////////////
 
 function generatePassword() {
@@ -19,20 +20,22 @@ function generatePassword() {
   //1. probably need some variables.  one for symbols, lettercase, uppercase, numbers. Look up how to make these codier?? 
   var symbols = ["!","#","$","%","&","'",'"',"(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~"]; //to start - couldn't include backslash???
   var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-  var upperCase = [lowerCase.toUpperCase()];
+  var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
   var numbers = ["0","1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
-  console.log(symbols);
-  console.log(upperCase);
 
-  //2. start user input. need to know password length.  Better to use if statement or while loop? 
-var uiLength = prompt("How long would you like your password to be? Needs to be between 8-128 characters"); //ui = user input
-    if (uiLength < 8 || uiLength> 128){
-        alert("You need the number to be between 8 and 128");
-    }
-    else {
-        uiLength = prompt("How long would you like your password to be? Needs to be between 8-128 characters");
-    }
+// do while
+  //2. start user input. need to know password length.  Better to use if statement or while loop? while loop keeps asking user until it's correct
+var uiLength;//ui = user input
+
+//check for random characters too!
+
+uiLength = prompt("How long would you like your password to be? Needs to be between 8-128 characters");
+     while(uiLength < 8 || uiLength > 128 || (isNaN(uiLength))){
+        alert("Reminder: Enter in a number between 8-128."); 
+        uiLength = prompt("How long would you like your password to be? Needs to be between 8-128 characters");}
+     
+    
 
     //Confirm message to users?? 
   //3. Continue prompts.  Now need to know if they want symbols, number, lowercase, and/or uppercase
@@ -46,11 +49,8 @@ var uiUpperCase = confirm("Would you like your password to contain uppercase let
 
 if (uiSymbols === false && uiNumbers === false && uiLowerCase === false && uiUpperCase === false){
     alert("You must choose at least one character type");
+   // return "try again";
 }
-else {
-    alert("generating password now");
-}
-
 //thoughts.  concatenate arrays.  shuffle them.  Then choose first string?
 var combinedArray = [];
 if (uiSymbols){
@@ -74,10 +74,8 @@ var choice = combinedArray[Math.floor(Math.random()*combinedArray.length)];
 passwordArray.push(choice);
 }
 
-password = passwordArray.join('')
+password = passwordArray.join('');
 return password ;
 
 }
 
-//did john move to the bottome??
-generateBtn.addEventListener("click", writePassword);
