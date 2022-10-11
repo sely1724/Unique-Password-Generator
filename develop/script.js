@@ -74,8 +74,11 @@ var choice = combinedArray[Math.floor(Math.random()*combinedArray.length)];
 passwordArray.push(choice);
 }
 
+//CHECK FOR IF PASSWORD CONTAINS ONE OF ALL REQUESTED THINGS
+
+
 password = passwordArray.join('');
-return password ;
+return password;
 
 }
 
