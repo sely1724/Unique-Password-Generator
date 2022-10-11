@@ -68,24 +68,30 @@ if (uiLowerCase){
 
  //have to be able to choose up to 128 characters!!!! How do we do this?  take array containing everything and randomize it to push 1 number each iteration into new array?
 
-passwordArray = [];
+function createPassword() {passwordArray = [];
 for (var i=0; i<uiLength; i++) {
 var choice = combinedArray[Math.floor(Math.random()*combinedArray.length)];
-passwordArray.push(choice);
+var password = passwordArray.push(choice);
+}
+ checkPW(password);
 }
 
 //CHECK FOR IF PASSWORD CONTAINS ONE OF ALL REQUESTED THINGS
-var included;
-included = ([/!#$%&,()*+-.:;<=>?@^_{|}~/]))
-if {
-    included.test(passwordArray)
-    
-    generatePassword();
+//Can I run below test on an array  Or do I need to change array to string?? 
+function checkPW(password) {
+//Changed to string.
+//Now I need to say if user selected value type 
+//THEN check to see if at least ONE value type is included in PW
+//THEN need to change it back to array/
+var passwordString = password.join('');;
+if (uiLowerCase) {
+    var selected = /a-z/;
+   if (!selected.test(passwordString)) {
+    createPassword();
+   };
+}
+return passwordString;
 };
-
-
-password = passwordArray.join('');
 return password;
-
 }
 
