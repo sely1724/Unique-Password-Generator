@@ -75,6 +75,13 @@ passwordArray.push(choice);
 }
 
 //CHECK FOR IF PASSWORD CONTAINS ONE OF ALL REQUESTED THINGS
+var included;
+included = ([/!#$%&,()*+-.:;<=>?@^_{|}~/]))
+if {
+    included.test(passwordArray)
+    
+    generatePassword();
+};
 
 
 password = passwordArray.join('');
