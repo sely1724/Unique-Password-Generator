@@ -18,22 +18,22 @@ function generatePassword() {
   /////////////////////////// WRITE YOUR CODE HERE /////////////////////////
 
   //1. probably need some variables.  one for symbols, lettercase, uppercase, numbers. Look up how to make these codier?? 
-  var symbols = ["!","#","$","%","&","'",'"',"(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~"]; //to start - couldn't include backslash???
-  var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-  var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-  var numbers = ["0","1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
-
-// do while
-  //2. start user input. need to know password length.  Better to use if statement or while loop? while loop keeps asking user until it's correct
+var symbols = ["!","#","$","%","&","'",'"',"(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~"]; //to start - couldn't include backslash???
+var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var numbers = ["0","1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var uiLength;//ui = user input
+var reminded = false;
 
-//check for random characters too!
 
-uiLength = prompt("How long would you like your password to be? Needs to be between 8-128 characters");
-     while(uiLength < 8 || uiLength > 128 || (isNaN(uiLength))){
-        alert("Reminder: Enter in a number between 8-128."); 
-        uiLength = prompt("How long would you like your password to be? Needs to be between 8-128 characters");}
+    do{
+        uiLength = prompt("How long would you like your password to be? Needs to be between 8-128 characters");
+        if (reminded == false){
+        alert("Reminder: Enter in a number between 8-128.")
+        reminded = true}; 
+    }
+
+       while(uiLength < 8 || uiLength > 128 || (isNaN(uiLength)));
      
     
 
@@ -69,7 +69,7 @@ if (uiLowerCase){
  //have to be able to choose up to 128 characters!!!! How do we do this?  take array containing everything and randomize it to push 1 number each iteration into new array?
 var passwordArray = createPassword(uiLength,combinedArray);
 var passwordString = passwordArray.join('');
-verifyPassword(uiLowerCase, passwordString);
+verifyPassword(uiLowerCase,uiUpperCase, uiSymbols, uiNumbers, passwordString);
 return passwordString;
 }
 
@@ -84,13 +84,35 @@ function createPassword(uiLength,combinedArray){
 
 
 
-function verifyPassword (uiLowerCase, passwordString) {
-    if (uiLowerCase) {
+function verifyPassword (lc,uc, s, n, pwString) {
+    if (lc) {
       var check = /[a-z]/;
-      if (!check.test(passwordString)) {
-    createPassword();
-      }}
+      if (!check.test(pwString)) {
+        createPassword();
+        }
+        }
 
-      
+      if (uc) {
+        var check = /[A-Z]/;
+        if (!check.test(pwString)) {
+        createPassword();
+        }}
+
+
+if (s) {
+            var check = /[!#$%&'"()*+,-./:;<=>?@[]^_`{|}~]/;
+            if (!check.test(pwString)) {
+              createPassword();
+            }}
+           
+if (n) {
+                var check = /[0-9]/;
+                if (!check.test(pwString)) {
+                  createPassword();
+                }}
+
     
     }
+
+
+    
