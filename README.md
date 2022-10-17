@@ -23,4 +23,4 @@ Please refer to the LICENSE in the repo.
 <img src= "./assets/media/screenshot3.png"/>
 
 ## Link to Deployed Website
-<!--[Link](websitelink)-->
+[Link](https://sely1724.github.io/unique-password-generator/)
