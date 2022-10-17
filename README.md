@@ -23,8 +23,4 @@ Please refer to the LICENSE in the repo.
 <img src= "./assets/media/screenshot3.png"/>
 
 ## Link to Deployed Website
-<<<<<<< HEAD
-[Link](websitelink)
-=======
-[Link](websitelink)
->>>>>>> abed94a (added better comments to JS and changed readme)
+<!--[Link](websitelink)-->
