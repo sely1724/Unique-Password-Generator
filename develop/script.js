@@ -17,41 +17,38 @@ generateBtn.addEventListener("click", writePassword);
 function generatePassword() {
   /////////////////////////// WRITE YOUR CODE HERE /////////////////////////
 
-  //1. probably need some variables.  one for symbols, lettercase, uppercase, numbers. Look up how to make these codier?? 
-var symbols = ["!","#","$","%","&","'",'"',"(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~"]; //to start - couldn't include backslash???
+//Arrays store the different character types 
+var symbols = ["!","#","$","%","&","'",'"',"(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~"];
 var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var numbers = ["0","1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var uiLength;//ui = user input
 var reminded = false;
 
-
-    do{ 
-        uiLength = prompt("How long would you like your password to be? Needs to be between 8-128 characters");
-        if ((uiLength < 8 || uiLength > 128 || (isNaN(uiLength))) && reminded == false){
+//Do while loop asks user for password length.  If user enters in a wrong number, they are reminded to enter in a number between 8-128 one time. 
+do{ 
+  uiLength = prompt("How long would you like your password to be? Needs to be between 8-128 characters");
+    if ((uiLength < 8 || uiLength > 128 || (isNaN(uiLength))) && reminded == false){
         alert("Reminder: Enter in a number between 8-128.")
-        reminded = true}; 
+        reminded = true
+      }; 
     }
-
-       while(uiLength < 8 || uiLength > 128 || (isNaN(uiLength)));
+while(uiLength < 8 || uiLength > 128 || (isNaN(uiLength)));
      
     
-
-    //Confirm message to users?? 
-  //3. Continue prompts.  Now need to know if they want symbols, number, lowercase, and/or uppercase
+//Confirm messages ask user what type of character types they want to include in pw
 var uiSymbols = confirm("Would you like your password to contain any symbols (e.g.!>^:)?");
 var uiNumbers = confirm("Would you like your password to contain numbers?");
 var uiLowerCase = confirm("Would you like your password to contain lowercase letters?");
 var uiUpperCase = confirm("Would you like your password to contain uppercase letters?");
 
 
-//4. Check for at least one character type.  While loop or if statement?
-
+//Check for at least one character type.
 if (uiSymbols === false && uiNumbers === false && uiLowerCase === false && uiUpperCase === false){
     alert("You must choose at least one character type");
-   // return "try again";
 }
-//thoughts.  concatenate arrays.  shuffle them.  Then choose first string?
+
+//New Array holds all character types user chose.
 var combinedArray = [];
 if (uiSymbols){
     combinedArray = combinedArray.concat(symbols);
@@ -66,13 +63,18 @@ if (uiLowerCase){
     combinedArray = combinedArray.concat(upperCase);
  }
 
- //have to be able to choose up to 128 characters!!!! How do we do this?  take array containing everything and randomize it to push 1 number each iteration into new array?
+//Store value that createPW function generates
 var passwordArray = createPassword(uiLength,combinedArray);
+//Converts pw to string
 var passwordString = passwordArray.join('');
+
+//Verify PW function called
 verifyPassword(uiLowerCase,uiUpperCase, uiSymbols, uiNumbers, passwordString);
+//Once PW is verified (i.e. includes at least one of each character type user selected, value (pw) is returned and shown to user)
 return passwordString;
 }
 
+//createPW is a function that randomizes pw based on character types/length user selected
 function createPassword(uiLength,combinedArray){
     var passwordArray = [];
     for (var i=0; i<uiLength; i++) {
@@ -83,33 +85,26 @@ function createPassword(uiLength,combinedArray){
 }
 
 
-
+//verifyPW is a function that checks to ensure all selected character types are included in PW.  If not, createPW is called again.
 function verifyPassword (lc,uc, s, n, pwString) {
     if (lc) {
       var check = /[a-z]/;
       if (!check.test(pwString)) {
         createPassword();
-        }
-        }
-
-      if (uc) {
-        var check = /[A-Z]/;
-        if (!check.test(pwString)) {
-        createPassword();
-        }}
-
-
-if (s) {
-            var check = /[!#$%&'"()*+,-./:;<=>?@[]^_`{|}~]/;
-            if (!check.test(pwString)) {
-              createPassword();
-            }}
-           
-if (n) {
-                var check = /[0-9]/;
-                if (!check.test(pwString)) {
-                  createPassword();
-                }}
-
-    
+        }};
+    if (uc) {
+      var check = /[A-Z]/;
+      if (!check.test(pwString)) {
+      createPassword();
+      }};
+    if (s) {
+      var check = /[!#$%&'"()*+,-./:;<=>?@[]^_`{|}~]/;
+      if (!check.test(pwString)) {
+      createPassword();
+      }};
+    if (n) {
+      var check = /[0-9]/;
+      if (!check.test(pwString)) {
+      createPassword();
+      }};
     }
